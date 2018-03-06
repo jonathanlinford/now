@@ -9,12 +9,12 @@ public class Conversation {
     String conversationID;
     ArrayList<Message> messages;
     DateTime started;
-    ArrayList<User> users;
+    ArrayList<String> users;
 
     public Conversation() {
     }
 
-    public Conversation(String conversationID, ArrayList<Message> messages, DateTime started, ArrayList<User> users) {
+    public Conversation(String conversationID, ArrayList<Message> messages, DateTime started, ArrayList<String> users) {
         this.conversationID = conversationID;
         this.messages = messages;
         this.started = started;
@@ -45,11 +45,11 @@ public class Conversation {
         this.started = started;
     }
 
-    public ArrayList<User> getUsers() {
+    public ArrayList<String> getUsers() {
         return users;
     }
 
-    public void setUsers(ArrayList<User> users) {
+    public void setUsers(ArrayList<String> users) {
         this.users = users;
     }
 
