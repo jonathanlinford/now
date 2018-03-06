@@ -17,7 +17,7 @@ public class Services {
 
     List<User> users = new ArrayList<>();
     List<Conversation> conversations = new ArrayList<>();
-    Map<String, String> loggedInUsers = new HashMap<>();
+    Map<String, String> loggedInUsers = new HashMap<>();    //<authToken, userID>
 
 
     //TODO: Data to be discarded after database established
@@ -26,7 +26,7 @@ public class Services {
     }
 
     public LoginResponse login(LoginRequest request){
-        LoginResponse response;
+        LoginResponse response = new LoginResponse();
 
         for(User u: users){
             if(u.getEmail().equals(request.getEmail()) && u.getPassword().equals(request.getPassword())){
@@ -34,19 +34,32 @@ public class Services {
                 String userID = u.getUserID();
                 loggedInUsers.put(authToken, userID);
 
-                response = new LoginResponse(true, null, authToken, )
-
-                break;
+                return new LoginResponse(true, null, authToken, getUsersConversations(userID));
             }
         }
-        return null;
+
+        return new LoginResponse(false, "Login data is incorrect", null, null);
     }
 
     public RegisterResponse register(RegisterRequest request){
-        return null;
+
+        for(User u: users){
+            if(u.getEmail().equals(request.getEmail())){
+                return new RegisterResponse(false, "Bad register data.", null, null);
+            }
+        }
+
+        User newUser = new User(User.idGenerator(), request.getEmail(), request.getPassword(),
+                request.getFirstName(), request.getLastName(), request.isOpen());
+        users.add(newUser);
+
+        String authToken = authTokenGenerator();
+        loggedInUsers.put(authToken, newUser.getUserID());
+
+        return new RegisterResponse(true, null, authToken, getUsersConversations(newUser.getUserID()));
     }
 
-    public List<Conversation> getUsersConversations(String userID){
+    private List<Conversation> getUsersConversations(String userID){
         List<Conversation> returnConversations = new ArrayList<>();
 
         for(Conversation c: conversations){

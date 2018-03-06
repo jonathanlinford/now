@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/NOW-server.iml" filepath="$PROJECT_DIR$/NOW-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-socket-server/web-socket-server.iml" filepath="$PROJECT_DIR$/web-socket-server/web-socket-server.iml" />
     </modules>
   </component>
 </project>

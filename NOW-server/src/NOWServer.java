@@ -1,11 +1,11 @@
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 
 public class NOWServer {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
         NOWServer server = new NOWServer();
         server.run();
     }
@@ -13,7 +13,7 @@ public class NOWServer {
     private void run(){
 
         try {
-            HttpServer server = HttpServer.create();
+            HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
             server.createContext("/user/login", new LoginHandler());
             System.out.println("/user/login endpoint created");
@@ -22,6 +22,7 @@ public class NOWServer {
             server.createContext("/user/friends", new FriendsHandler());
             System.out.println("/user/friends endpoint created");
 
+            server.setExecutor(null);
             server.start();
             System.out.println("Server started...");
 

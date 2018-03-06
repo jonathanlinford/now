@@ -17,6 +17,26 @@ public class RegisterResponse extends Response{
         this.conversation = conversations;
     }
 
+    @Override
+    public boolean isSuccess() {
+        return super.isSuccess();
+    }
+
+    @Override
+    public void setSuccess(boolean success) {
+        super.setSuccess(success);
+    }
+
+    @Override
+    public String getMessage() {
+        return super.getMessage();
+    }
+
+    @Override
+    public void setMessage(String message) {
+        super.setMessage(message);
+    }
+
     public String getAuthToken() {
         return authToken;
     }
